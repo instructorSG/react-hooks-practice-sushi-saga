@@ -1,16 +1,15 @@
 import React, {useState} from "react";
 
-function Sushi({ sushi, whenEaten, plates }) {
-  const [ eaten, setEaten ] = useState(false)
-
-  const { name, img_url, price } = sushi
-console.log('name',name,'img_url', img_url, 'price', price)
+function Sushi({ sushi, whenEaten }) {
+  const { name, img_url, price, eaten } = sushi
 
   const handleClick = () => {
-    setEaten(true)
-
-    whenEaten(sushi)
-   }
+    if (!eaten) {
+      whenEaten(sushi)
+    } else {
+      alert('Sushi was eaten already...')
+    }
+  }
 
   return (
     <div className="sushi">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SushiContainer from "./SushiContainer";
 import Table from "./Table";
 
+
 const API = "http://localhost:3001/sushis";
 
 function App() {
@@ -10,8 +11,14 @@ function App() {
   const [ plates, setPlates ] = useState([])
 
   const sushiEaten = (s) => {
-    setPlates(prevPlates => [ ...prevPlates, s ])
-    setBal(prevBal => prevBal - s.price)
+    if (s.price <= bal) {
+      const updatedSushis = sushiList.map((sushi) => { return s.id === sushi.id ? { ...sushi, eaten: true } : sushi })
+      setSushiList(updatedSushis)
+      setPlates(prevPlates => [ ...prevPlates, s ])
+      setBal(prevBal => prevBal - s.price)
+    } else {
+      alert('not enough money')
+    }
   }
 
   useEffect(() => {
@@ -31,7 +38,8 @@ function App() {
         sushiList={ sushiList }
         whenEaten={ sushiEaten }
       />
-      <Table  plates={ plates } balance={ bal } />
+      <Table plates={ plates } balance={ bal } />
+
     </div>
   );
 }

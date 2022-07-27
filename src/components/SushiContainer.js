@@ -5,7 +5,7 @@ import Sushi from './Sushi'
 function SushiContainer({ sushiList,whenEaten }) {
   const [ listIndex, setListIndex ] = useState(0)
 
-  const sushis = sushiList.slice(listIndex, 4)
+  const sushis = sushiList.slice(listIndex, listIndex+4)
     .map((s) =>
       <Sushi
         key={ s.id }
@@ -19,7 +19,7 @@ function SushiContainer({ sushiList,whenEaten }) {
   return (
     <div className="belt">
       {sushis}
-      <MoreButton incrementIndex={ incrementIndex } />
+      <MoreButton  incrementIndex={ incrementIndex } />
     </div>
   );
 }
